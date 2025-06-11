@@ -1,6 +1,6 @@
-const Project = () => {
+const Projects = () => {
     return (
         <div>Project page</div>
     );
 }
-export default Project
+export default Projects

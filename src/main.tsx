@@ -7,7 +7,8 @@ import {
 } from "react-router";
 import Home from 'pages/home';
 import About from 'pages/about';
-import Project from 'pages/project';
+import Projects from '@/pages/projects';
+
 
 let router = createBrowserRouter([
   {
@@ -23,8 +24,8 @@ let router = createBrowserRouter([
         Component: About
       },
       {
-        path: "/project",
-        Component: Project
+        path: "/projects",
+        Component: Projects
       },
     ]
   },
