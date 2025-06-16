@@ -1,0 +1,788 @@
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 80px;
+    background-color: var(--bg-primary);
+    transition: background-color 0.3s ease;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+}
+
+.rolesList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.role {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-secondary);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.role:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="dark"] .role {
+    background: rgba(0, 255, 255, 0.1);
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    color: var(--neon-cyan);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+}
+
+[data-theme="dark"] .role:hover {
+    background: rgba(0, 255, 255, 0.2);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.8);
+}
+
+.content h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+    line-height: 1.2;
+}
+
+.nameContainer {
+    color: var(--accent);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.2rem;
+    vertical-align: baseline;
+}
+
+.letterL,
+.letterV {
+    height: 2.5rem;
+    width: auto;
+    display: inline-block;
+    vertical-align: baseline;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    position: relative;
+}
+
+.letterL {
+    margin-right: 0.1rem;
+    height: 2.8rem;
+    /* Increased from 2.5rem */
+    filter: brightness(0) saturate(100%) invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg) brightness(104%) contrast(97%);
+}
+
+.letterV {
+    margin-left: 0.1rem;
+    margin-right: 0.05rem;
+    filter: brightness(0) saturate(100%) invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg) brightness(104%) contrast(97%);
+}
+
+/* Individual hover animations for L letter */
+.letterL:hover {
+    transform: scale(1.2) rotate(-5deg) translateY(-8px);
+    filter: brightness(0) saturate(100%) invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg) brightness(120%) contrast(110%);
+}
+
+.letterL::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.4s ease;
+    z-index: -1;
+    opacity: 0;
+}
+
+.letterL:hover::before {
+    width: 60px;
+    height: 60px;
+    opacity: 0.3;
+}
+
+/* Individual hover animations for V letter */
+.letterV:hover {
+    transform: scale(1.2) rotate(5deg) translateY(-8px);
+    filter: brightness(0) saturate(100%) invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg) brightness(120%) contrast(110%);
+}
+
+.letterV::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.4s ease;
+    z-index: -1;
+    opacity: 0;
+}
+
+.letterV:hover::before {
+    width: 60px;
+    height: 60px;
+    opacity: 0.3;
+}
+
+/* Dark theme individual animations */
+[data-theme="dark"] .letterL,
+[data-theme="dark"] .letterV {
+    filter: brightness(0) saturate(100%) invert(66%) sepia(100%) saturate(2000%) hue-rotate(180deg) brightness(120%) contrast(120%);
+}
+
+[data-theme="dark"] .letterL:hover {
+    transform: scale(1.3) rotate(-8deg) translateY(-12px);
+    filter: brightness(0) saturate(100%) invert(66%) sepia(100%) saturate(2000%) hue-rotate(180deg) brightness(150%) contrast(140%) drop-shadow(0 0 20px rgba(0, 255, 255, 1)) drop-shadow(0 0 40px rgba(0, 255, 255, 0.5));
+    animation: letterLPulse 0.6s ease-in-out;
+}
+
+[data-theme="dark"] .letterV:hover {
+    transform: scale(1.3) rotate(8deg) translateY(-12px);
+    filter: brightness(0) saturate(100%) invert(66%) sepia(100%) saturate(2000%) hue-rotate(180deg) brightness(150%) contrast(140%) drop-shadow(0 0 20px rgba(0, 255, 255, 1)) drop-shadow(0 0 40px rgba(0, 255, 255, 0.5));
+    animation: letterVPulse 0.6s ease-in-out;
+}
+
+[data-theme="dark"] .letterL::before,
+[data-theme="dark"] .letterV::before {
+    background: radial-gradient(circle, var(--neon-cyan) 0%, var(--neon-pink) 50%, transparent 70%);
+}
+
+[data-theme="dark"] .letterL:hover::before {
+    width: 80px;
+    height: 80px;
+    opacity: 0.4;
+    animation: glowPulseL 0.6s ease-in-out;
+}
+
+[data-theme="dark"] .letterV:hover::before {
+    width: 80px;
+    height: 80px;
+    opacity: 0.4;
+    animation: glowPulseV 0.6s ease-in-out;
+}
+
+/* Keyframe animations for individual letters */
+@keyframes letterLPulse {
+    0% {
+        transform: scale(1.3) rotate(-8deg) translateY(-12px);
+    }
+
+    50% {
+        transform: scale(1.4) rotate(-10deg) translateY(-15px);
+    }
+
+    100% {
+        transform: scale(1.3) rotate(-8deg) translateY(-12px);
+    }
+}
+
+@keyframes letterVPulse {
+    0% {
+        transform: scale(1.3) rotate(8deg) translateY(-12px);
+    }
+
+    50% {
+        transform: scale(1.4) rotate(10deg) translateY(-15px);
+    }
+
+    100% {
+        transform: scale(1.3) rotate(8deg) translateY(-12px);
+    }
+}
+
+@keyframes glowPulseL {
+    0% {
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+    }
+
+    50% {
+        box-shadow: 0 0 40px rgba(0, 255, 255, 0.8), 0 0 60px rgba(255, 0, 255, 0.4);
+    }
+
+    100% {
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+    }
+}
+
+@keyframes glowPulseV {
+    0% {
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+    }
+
+    50% {
+        box-shadow: 0 0 40px rgba(255, 0, 255, 0.8), 0 0 60px rgba(0, 255, 255, 0.4);
+    }
+
+    100% {
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+    }
+}
+
+/* Sequential hover effect for the entire name */
+.nameContainer:hover .letterL {
+    animation-delay: 0s;
+}
+
+.nameContainer:hover .letterV {
+    animation-delay: 0.1s;
+}
+
+/* Floating animation on idle */
+@keyframes letterFloat {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-3px);
+    }
+}
+
+.letterL {
+    animation: letterFloat 3s ease-in-out infinite;
+    animation-delay: 0s;
+}
+
+.letterV {
+    animation: letterFloat 3s ease-in-out infinite;
+    animation-delay: 0.5s;
+}
+
+@media (max-width: 768px) {
+    .content h1 {
+        font-size: 2rem;
+    }
+
+    .letterL,
+    .letterV {
+        height: 2rem;
+    }
+
+    .letterL {
+        height: 2.2rem;
+        /* Slightly larger than V on mobile */
+    }
+
+    .letterL:hover,
+    .letterV:hover {
+        transform: scale(1.15) translateY(-6px);
+    }
+
+    [data-theme="dark"] .letterL:hover,
+    [data-theme="dark"] .letterV:hover {
+        transform: scale(1.2) translateY(-8px);
+    }
+}
+
+@media (max-width: 480px) {
+    .content h1 {
+        font-size: 1.8rem;
+    }
+
+    .letterL,
+    .letterV {
+        height: 1.8rem;
+    }
+
+    .letterL {
+        height: 2rem;
+        /* Slightly larger than V on small mobile */
+    }
+
+    .letterL:hover,
+    .letterV:hover {
+        transform: scale(1.1) translateY(-4px);
+    }
+
+    [data-theme="dark"] .letterL:hover,
+    [data-theme="dark"] .letterV:hover {
+        transform: scale(1.15) translateY(-6px);
+    }
+}
+
+.content h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--text-secondary);
+    position: relative;
+    min-height: 2rem;
+    /* Prevent layout shift */
+    font-family: "Courier New", monospace;
+    /* Typewriter font */
+}
+
+.content h2::before {
+    content: "▶";
+    color: var(--accent);
+    margin-right: 0.5rem;
+    font-size: 0.8em;
+}
+
+/* Typewriter cursor animation */
+[data-theme="dark"] .content h2 {
+    color: var(--neon-cyan);
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+}
+
+.content p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    color: var(--text-secondary);
+    max-width: 500px;
+    position: relative;
+}
+
+.content p::before {
+    content: "";
+    position: absolute;
+    left: -20px;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, var(--accent), transparent);
+    border-radius: 2px;
+}
+
+[data-theme="dark"] .content p::before {
+    background: linear-gradient(180deg, var(--neon-cyan), var(--neon-pink), transparent);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+.emphasis {
+    color: var(--accent);
+    font-weight: 700;
+    position: relative;
+    padding: 0 0.2rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.emphasis::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent, var(--accent), transparent);
+    opacity: 0.1;
+    border-radius: 4px;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.emphasis:hover::before {
+    transform: scaleX(1);
+}
+
+.emphasis::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+    border-radius: 1px;
+}
+
+.emphasis:hover::after {
+    transform: scaleX(1);
+}
+
+[data-theme="dark"] .emphasis {
+    color: var(--neon-cyan);
+    text-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
+    font-weight: 700;
+}
+
+[data-theme="dark"] .emphasis::before {
+    background: linear-gradient(45deg, transparent, var(--neon-cyan), var(--neon-pink), transparent);
+    opacity: 0.2;
+}
+
+[data-theme="dark"] .emphasis::after {
+    background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+[data-theme="dark"] .emphasis:hover {
+    text-shadow: 0 0 15px rgba(0, 255, 255, 1);
+}
+
+/* Special styling for specific keywords */
+.emphasis[data-keyword="exceptional"]::after {
+    background: linear-gradient(90deg, #ff6b6b, #feca57);
+}
+
+.emphasis[data-keyword="scalable"]::after {
+    background: linear-gradient(90deg, #48dbfb, #0abde3);
+}
+
+.emphasis[data-keyword="React"]::after {
+    background: linear-gradient(90deg, #61dafb, #21759b);
+}
+
+.emphasis[data-keyword="Node.js"]::after {
+    background: linear-gradient(90deg, #68a063, #3c5233);
+}
+
+/* Add these new keyword styles after the existing ones */
+
+.emphasis[data-keyword="software-engineering"]::after {
+    background: linear-gradient(90deg, #667eea, #764ba2);
+}
+
+.emphasis[data-keyword="intelligent"]::after {
+    background: linear-gradient(90deg, #f093fb, #f5576c);
+}
+
+.emphasis[data-keyword="computer-vision"]::after {
+    background: linear-gradient(90deg, #4facfe, #00f2fe);
+}
+
+.emphasis[data-keyword="llm"]::after {
+    background: linear-gradient(90deg, #43e97b, #38f9d7);
+}
+
+.emphasis[data-keyword="challenge"]::after {
+    background: linear-gradient(90deg, #fa709a, #fee140);
+}
+
+.emphasis[data-keyword="level-up"]::after {
+    background: linear-gradient(90deg, #a8edea, #fed6e3);
+}
+
+.emphasis[data-keyword="real-world"]::after {
+    background: linear-gradient(90deg, #ff9a9e, #fecfef);
+}
+
+.emphasis[data-keyword="impact"]::after {
+    background: linear-gradient(90deg, #ffecd2, #fcb69f);
+}
+
+/* Dark theme versions */
+[data-theme="dark"] .emphasis[data-keyword="exceptional"]::after {
+    background: linear-gradient(90deg, #ff00ff, #00ffff);
+    box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+}
+
+[data-theme="dark"] .emphasis[data-keyword="scalable"]::after {
+    background: linear-gradient(90deg, #00ffff, #ff00ff);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+[data-theme="dark"] .emphasis[data-keyword="React"]::after {
+    background: linear-gradient(90deg, #00ffff, #00ff00);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+[data-theme="dark"] .emphasis[data-keyword="Node.js"]::after {
+    background: linear-gradient(90deg, #00ff00, #ffff00);
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+
+[data-theme="dark"] .emphasis[data-keyword="software-engineering"]::after {
+    background: linear-gradient(90deg, #00ffff, #ff00ff);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+[data-theme="dark"] .emphasis[data-keyword="intelligent"]::after {
+    background: linear-gradient(90deg, #ff00ff, #00ff00);
+    box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+}
+
+[data-theme="dark"] .emphasis[data-keyword="computer-vision"]::after {
+    background: linear-gradient(90deg, #00ffff, #ffff00);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+[data-theme="dark"] .emphasis[data-keyword="llm"]::after {
+    background: linear-gradient(90deg, #00ff00, #00ffff);
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+
+[data-theme="dark"] .emphasis[data-keyword="challenge"]::after {
+    background: linear-gradient(90deg, #ff00ff, #ffff00);
+    box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+}
+
+[data-theme="dark"] .emphasis[data-keyword="level-up"]::after {
+    background: linear-gradient(90deg, #00ffff, #ff00ff);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+[data-theme="dark"] .emphasis[data-keyword="real-world"]::after {
+    background: linear-gradient(90deg, #ffff00, #00ff00);
+    box-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+}
+
+[data-theme="dark"] .emphasis[data-keyword="impact"]::after {
+    background: linear-gradient(90deg, #ff00ff, #00ffff);
+    box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+}
+
+@media (max-width: 768px) {
+    .content p {
+        max-width: 100%;
+    }
+
+    .content p::before {
+        display: none;
+    }
+}
+
+.cta {
+    display: flex;
+    gap: 1rem;
+}
+
+@media (max-width: 768px) {
+    .cta {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+}
+
+.skillBtn,
+.resumeBtn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.skillBtn {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.skillBtn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.resumeBtn {
+    background: linear-gradient(135deg, #ec4899 0%, #a855f7 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(168, 85, 247, 0.3);
+}
+
+.resumeBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(168, 85, 247, 0.4);
+}
+
+.resumeBtn .icon {
+    width: 16px;
+    height: 16px;
+}
+
+[data-theme="dark"] .skillBtn {
+    background: rgba(0, 255, 255, 0.1);
+    border: 1px solid rgba(0, 255, 255, 0.5);
+    color: var(--neon-cyan);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+}
+
+[data-theme="dark"] .skillBtn:hover {
+    background: rgba(0, 255, 255, 0.2);
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+}
+
+[data-theme="dark"] .resumeBtn {
+    background: linear-gradient(135deg, #ff00ff 0%, #00ffff 100%);
+    box-shadow: 0 4px 15px rgba(255, 0, 255, 0.4);
+}
+
+[data-theme="dark"] .resumeBtn:hover {
+    box-shadow: 0 8px 25px rgba(255, 0, 255, 0.6);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+.imageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+[data-theme="dark"] .nameContainer {
+    text-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+}
+
+[data-theme="light"] .letterL,
+[data-theme="light"] .letterV {
+    filter: brightness(0) saturate(100%) invert(13%) sepia(94%) saturate(1352%) hue-rotate(87deg) brightness(97%) contrast(80%);
+}
+
+[data-theme="light"] .letterL:hover,
+[data-theme="light"] .letterV:hover {
+    filter: brightness(0) saturate(100%) invert(13%) sepia(94%) saturate(1352%) hue-rotate(87deg) brightness(110%) contrast(90%);
+}
+
+/* Light theme enhancements for hero */
+[data-theme="light"] .hero {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background-attachment: fixed;
+    position: relative;
+}
+
+[data-theme="light"] .hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
+    z-index: 1;
+}
+
+[data-theme="light"] .hero .container {
+    position: relative;
+    z-index: 2;
+}
+
+/* Enhanced light theme role tags */
+[data-theme="light"] .role {
+    background: rgba(102, 126, 234, 0.1);
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    color: var(--accent);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.1);
+    backdrop-filter: blur(20px);
+}
+
+[data-theme="light"] .role:hover {
+    background: rgba(102, 126, 234, 0.2);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
+    transform: translateY(-3px) scale(1.02);
+}
+
+/* Enhanced light theme name styling */
+[data-theme="light"] .nameContainer {
+    text-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+/* Enhanced light theme letter effects */
+[data-theme="light"] .letterL:hover {
+    transform: scale(1.3) rotate(-8deg) translateY(-10px);
+    filter: brightness(0) saturate(100%) invert(13%) sepia(94%) saturate(1352%) hue-rotate(87deg) brightness(130%) contrast(120%) drop-shadow(0 5px 15px rgba(26, 32, 44, 0.4));
+}
+
+[data-theme="light"] .letterV:hover {
+    transform: scale(1.3) rotate(8deg) translateY(-10px);
+    filter: brightness(0) saturate(100%) invert(13%) sepia(94%) saturate(1352%) hue-rotate(87deg) brightness(130%) contrast(120%) drop-shadow(0 5px 15px rgba(26, 32, 44, 0.4));
+}
+
+[data-theme="light"] .letterL:hover::before,
+[data-theme="light"] .letterV:hover::before {
+    background: radial-gradient(circle, rgba(26, 32, 44, 0.3) 0%, rgba(26, 32, 44, 0.2) 50%, transparent 70%);
+    width: 80px;
+    height: 80px;
+    opacity: 0.6;
+}
+
+/* Enhanced light theme typewriter text */
+[data-theme="light"] .content h2 {
+    color: #1a202c !important;
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    -webkit-text-fill-color: unset !important;
+    background-clip: unset !important;
+    text-shadow: none !important;
+}
+
+/* Enhanced light theme paragraph styling */
+[data-theme="light"] .content p::before {
+    background: var(--light-gradient-1);
+    box-shadow: 0 0 15px rgba(102, 126, 234, 0.3);
+}
+
+/* Enhanced light theme emphasis effects */
+[data-theme="light"] .emphasis {
+    background: linear-gradient(45deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+    border-radius: 6px;
+    padding: 0.1rem 0.3rem;
+    transition: all 0.3s ease;
+}
+
+[data-theme="light"] .emphasis:hover {
+    background: linear-gradient(45deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+}
+
+/* Enhanced light theme button styling */
+[data-theme="light"] .skillBtn {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+    border: 2px solid rgba(102, 126, 234, 0.3);
+    color: var(--accent);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+    backdrop-filter: blur(20px);
+}
+
+[data-theme="light"] .skillBtn:hover {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
+    box-shadow: 0 15px 35px rgba(102, 126, 234, 0.25);
+    transform: translateY(-3px) scale(1.02);
+    border-color: rgba(102, 126, 234, 0.5);
+}
+
+[data-theme="light"] .resumeBtn {
+    background: var(--light-gradient-1);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+    border: none;
+}
+
+[data-theme="light"] .resumeBtn:hover {
+    box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+    transform: translateY(-3px) scale(1.02);
+}

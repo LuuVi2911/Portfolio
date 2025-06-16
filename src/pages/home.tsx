@@ -1,6 +1,12 @@
+import Hero from "components/hero/hero";
+import AboutHomePage from "components/about/about";
+
 const Home = () => {
     return (
-        <div>Home page</div>
+        <>
+            <Hero />
+            <AboutHomePage />
+        </>
     );
 }
 export default Home

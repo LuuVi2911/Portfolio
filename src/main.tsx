@@ -16,7 +16,7 @@ let router = createBrowserRouter([
     Component: Layout,
     children: [
       {
-        path: "/home",
+        index: true,
         Component: Home
       },
       {
