@@ -38,7 +38,6 @@ const skillMap: Record<string, string> = {
     docker,
     git,
     postman,
-    sklearn
 };
 
 export const skillsImage = (skill: string): string | null => {
